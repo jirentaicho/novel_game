@@ -1,8 +1,34 @@
 # 現在制作中です
 
 
+環境について
 
-##　初期設定
+・nginx → 実行用
+・node → 開発用
+
+public → ビルド済（公開ファイル)
+src → tsファイル（開発）
+
+## 初期設定
+
+git cloneなりしてプロジェクトのルートで以下コマンド
+
+> dokcer-compose up -d
+
+終わったら以下コマンド
+
+> docker exec -it novel_node sh
+
+次に以下コマンド
+
+> npm install
+
+ビルドできるかテスト
+
+> npm run build
+
+
+##　1から開発する場合
 
 まずは以下コマンドで開発環境を構築します
 
@@ -100,6 +126,8 @@ ymlファイルをパースする
         "fs": false,
         "js-yaml": false
     }
+
+## 開発メモ
 
 ### yamlのパース
 
