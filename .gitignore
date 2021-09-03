@@ -1,0 +1,4 @@
+/node
+app/node_modules
+app/public/images/*
+docker-compose copy.yml

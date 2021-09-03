@@ -1,0 +1,36 @@
+images:
+  - image01.jpg
+  - image02.jpg
+  - image03.jpg
+valiable:
+  - 好感度
+  - やる気
+  - 元気
+  - 久保田
+scenario:
+  scene1:
+    type: MESSAGE
+    next: scene2
+    back: image03.jpg
+    render:
+      - speaker: 渋谷かのん
+        message:
+          - 私はアイドルって感じじゃないじゃん
+          - 私には無理だよ
+          - ごめんね
+      - speaker: 可可
+        message:
+          - 素晴らしい歌声の人・・・！！
+          - 私はかのんさんとスクールアイドルがしたいです！
+          - グソクムシがですか？
+      - speaker: すみれ
+        message:
+          - かーのーんー！！！！！
+  scene2:
+    type: CHOISE
+    back: image02.jpg
+    render:
+      - speaker: かのん
+        message:
+          - どりゃあああああああ
+          - ズリャアアアアアアアア
