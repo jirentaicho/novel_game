@@ -9,7 +9,6 @@ export default class ImageRender implements Render<string>{
         const canva = Canvas.getInstance();
         const context = canva.getCtx();
         const assetManager = AssetManager.getInstance();
-        
         context.drawImage(assetManager.getItem(str), 0, 0);
 
     }

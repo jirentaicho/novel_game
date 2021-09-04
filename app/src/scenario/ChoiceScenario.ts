@@ -3,6 +3,10 @@ import AssetManager from "../manager/AssetManager";
 import Scenario from "./Scenario";
 
 export default class ChoiceScenario extends Scenario{
+    
+    runLogic(): void {
+        throw new Error("Method not implemented.");
+    }
 
     settingScenario(object: any): void {
         

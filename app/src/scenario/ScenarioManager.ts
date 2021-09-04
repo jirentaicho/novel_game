@@ -48,7 +48,7 @@ export default class ScenarioManager{
      * 絶対にゲームデータモデル的なものにしたほうが安全
      */
     public runScenario(): void{
-        this.scenario.executeScenario();
+        this.scenario.runLogic();
     }
 
     /**

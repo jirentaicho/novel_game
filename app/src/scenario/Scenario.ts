@@ -12,7 +12,7 @@ export default abstract class Scenario{
     protected actorRight: string = "";
 
     abstract settingScenario(object: any): void;
-
+    abstract runLogic(): void;
     abstract executeScenario(): void;
 
     /** 共通設定 */

@@ -26,62 +26,34 @@ export default class MessageScenario extends Scenario{
         return MessageScenario.instance;
     }
 
-    /** ここで管理しているものをシーンクラスなどに分類させる。→クラス変数が気持ち悪すぎる */
-    // これがメッセージのモデルなのでクラス変数は合っている。
-
-
-    /**　static params  */
-
-    //　next scenario name
     private nextScenarioName: string = "";
-    // backimage is common 
 
-    /** dynamic params */
     private render: Array<any> = new Array();
 
-
-    // ここ消します。
-        // スピーカー
-        private speaker: string = "";
-        // メッセージの配列
-        private messages: Array<string> = [];
-
-    
-    /**
-     * 構想確認
-     * レンダーの中に複数のセリフ系が入ってる。
-     * render[
-     *  {speaker,message},
-     *  {speaker,message},
-     *  {speaker,message},
-     * ]
-     * 
-     */
-
-    // 読んでいるレンダーインデックス番号
     private renderIndex: number = 0;
-    // 読んでいるメッセージインデックス番号
+
     private messageIndex: number = 0;
 
-
-    private getnextMessage(): void{
+    public runLogic(): void{
 
         //　TODO このあたりの条件分岐は何やってるかわかりにくいのでメソッド抽出なりする
-
         // そもそもレンダーが空になっていたら
         if(this.renderIndex >= this.render.length){
             // 次の処理を実行する
             // initScenatio(nextScenarioName);
+            console.log("DONE!!");
         }
 
         if(this.messageIndex >= this.render[this.renderIndex].message.length ){
             // 次のレンダーにして処理を戻す
             this.renderIndex++;
             //　再帰的に呼び出す
-            this.getnextMessage();
+            this.runLogic();
         }
 
-        //　
+        // 全て描画します。
+        this.executeScenario();
+        // メッセージをインクリメントします。
         this.messageIndex++;
 
     }
@@ -93,12 +65,15 @@ export default class MessageScenario extends Scenario{
 
   
     public settingScenario(object: any): void {
-        this.messages = object.render[this.renderIndex].message;
-        this.speaker = object.render[this.renderIndex].speaker;
+        this.render = object.render;
     }
 
     public executeScenario(): void {
-        
+    
+
+        console.log("---------------------")
+        console.log(this.messageIndex);
+
         // 背景画像を描画します。
         const imageRender = new ImageRender();
         imageRender.rendering(this.backImage);
@@ -115,7 +90,7 @@ export default class MessageScenario extends Scenario{
 
 
         const spakerRender = new SpeakerRender();
-        spakerRender.rendering(this.speaker);
+        spakerRender.rendering(this.render[this.renderIndex].speaker);
 
         // ウインドウを描画する
         const rectRender = new RectRender();
@@ -123,9 +98,11 @@ export default class MessageScenario extends Scenario{
 
         // ここ配列管理される
         //　テキストを描画する
-
+        // 文字列の更新も再描画になるはずなので、文字列の更新でも全て描画で問題ないはず。
         const textRender = new TextRender();
-        textRender.rendering(this.messages[this.messageIndex]);
+        textRender.rendering(this.render[this.renderIndex].message[this.messageIndex]);
+
+        
 
     }
     
