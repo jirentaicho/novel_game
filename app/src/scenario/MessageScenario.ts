@@ -70,10 +70,6 @@ export default class MessageScenario extends Scenario{
 
     public executeScenario(): void {
     
-
-        console.log("---------------------")
-        console.log(this.messageIndex);
-
         // 背景画像を描画します。
         const imageRender = new ImageRender();
         imageRender.rendering(this.backImage);

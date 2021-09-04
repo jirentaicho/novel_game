@@ -8,40 +8,6 @@ export default class AssetLoader{
     private constructor(){
     }
 
-
-
-    static loadImage2(filename: string):void{
-
-        new Promise<CanvasImageSource>( (resolve,reject) => {
-            const image = new Image();
-            image.addEventListener("load", () => {
-                resolve(image);
-            });
-            image.src = `images/${filename}`;
-        }).then( (image) => {
-            const assetManager = AssetManager.getInstance();
-            assetManager.setItem(filename,image);
-            
-        })
-    }
-
-
-    static loadImage3(filename: string): Promise<object>{
-
-        return new Promise<object>( (resolve,reject) => {
-            const image = new Image();
-            image.addEventListener("load", () => {
-                const result = {
-                    name: filename,
-                    image: image,
-                }
-                resolve(result);
-            });
-            image.src = `images/${filename}`;
-        });
-    }
-
-
     /**
      * 
      * ファイル名からロード完了した画像を返します。（Promiseを返します）
@@ -60,7 +26,6 @@ export default class AssetLoader{
             image.src = `images/${filename}`;
         });
     }
-
 
     /**
      * 

@@ -16,8 +16,7 @@ class App{
      * 全てのアセットの読み込みが完了したらゲームを開始する
      */
     public async setup(): Promise<void>{
-
-        
+  
         const gamedata = await AssetLoader.loadGameData("gamedata.yml");
         const yaml = require("js-yaml");
         const game = yaml.load(gamedata);
@@ -30,59 +29,11 @@ class App{
             assetManager.setItem(image,loadResult);
         }))
        this.update();
-
-        
-
-
-
-
-        /*
-
-
-
-        const gamedata = AssetLoader.loadGameData("gamedata.yml");
-        gamedata.then( data => {
-
-            const yaml = require("js-yaml");
-            const game = yaml.load(data);
-
-            const assetManager = AssetManager.getInstance();
-            assetManager.setGameData(game);
-
-            //　ここ書き方やばい
-            // TODO 変数名を修正する
-            
-            Promise.all(game.images.map( (image: string)  => {
-                const loadResult = AssetLoader.loadImage(image);
-                loadResult.then(result => {
-                    assetManager.setItem(image,result);
-                    console.log("chokatawwww")
-                })
-            }))
-            
-
-        })
-
-        */
     }
-
-
-    private LoadAllAsset(gamedata: any): Promise<any>{
-        return Promise.all(gamedata.images.map( (image: string)  => {
-            AssetLoader.loadImage(image);
-        }))
-        .then( (results) => {
-            console.log(results);
-        })
-    }
-
     private update(): void {
-        //requestAnimationFrame(this.update.bind(this));
         this.game.update();
     }
-
 }
-
 
 /**
  * 処理の最初
