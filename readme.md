@@ -265,8 +265,22 @@ webpackを利用しているので、以下のコマンドでpublicフォルダ�
 * 画像は全てimagesフォルダに配置してください。
 * 
 
-### aaaaaaa
+### TypeScriptでのジェネレータの作成方法
+
+文法的なもの
+*methodName(): IterableIterator<T>{
+    yield hoge;
+}
+
+example
+    *testgenerate(): IterableIterator<number>{
+        yield 0;
+    }
+
 
 
 ### aaaaaa
+
+
+
 

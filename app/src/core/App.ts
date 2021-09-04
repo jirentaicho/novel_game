@@ -70,7 +70,7 @@ class App{
             }))
             .then(() => {
                 console.log("スタートupdate");
-                // console.log(assetManager.getGameData());
+                console.log(assetManager.getGameData());
                 // console.log(assetManager.getItems());
                 //セーブデータの読み込み
                 // loadSaveData();
