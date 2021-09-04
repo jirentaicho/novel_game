@@ -12,7 +12,7 @@ export default class ScenatioFactory{
 
     static getScenario(type: string): Scenario{
         if(type == SCENARIO_TYPE.MESSAGE){
-            return new MessageScenario();
+            return MessageScenario.getInstance();
         }else{
             return new ChoiceScenario();
         }

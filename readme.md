@@ -27,6 +27,16 @@ git cloneなりしてプロジェクトのルートで以下コマンド
 
 > npm run build
 
+これはpackage.jsonに記載されている以下が参照されます
+
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "build": "webpack --mode=production",
+        "start": "webpack-cli serve --mode development"
+    },
+
+
+
 
 ##　1から開発する場合
 

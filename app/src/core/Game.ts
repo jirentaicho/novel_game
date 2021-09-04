@@ -7,22 +7,11 @@ export default class Game{
 
     private scenarioManager: ScenarioManager = ScenarioManager.getInstance();
 
-
     public update(): void{
 
-        //　目標
+        //　TODO なんかここださいので修正したい
+        this.scenarioManager.setUp();
         this.scenarioManager.runScenario();
-
-
-
-        // いらない記載が多すぎる。canvasの取得やアセットマネージャーの取得など。
-        // 基本的にはdrawのみです。
-       // → render.drar(scene.getimage);
-
-        // タイトル画面とかもここかな？
-        // タイトル画面もシーンの一つで管理できそう
-        // →これガチでやめとけ
-        // →ポーズ画面とかも条件分岐でやっとけまじで
 
         // シーンの描画
         // シーンでは、シーンから画像とテキストの描画を行う

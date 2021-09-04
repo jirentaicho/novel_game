@@ -2,12 +2,18 @@ import Scenario from './Scenario'
 import AssetManager from '../manager/AssetManager';
 import MessageScenario from './MessageScenario';
 import ScenatioFactory from './ScenarioFactory';
+import { SCENARIO_TYPE } from './ScenatioType';
 
+/**
+ * TODO クラス変数みたいなのは消したい。
+ */
 export default class ScenarioManager{
     
     private static instance: ScenarioManager;
 
-    private constructor(){}
+    private constructor(){
+        
+    }
 
     public static getInstance(): ScenarioManager{
         if(!ScenarioManager.instance){
@@ -16,22 +22,33 @@ export default class ScenarioManager{
         return ScenarioManager.instance;
     }
 
-    /**
-     * シナリオを進めます。
-     * アセットデータのymlからシナリオを作成して、シナリオを実行します。
-     */
-    public runScenario(): void{
+    //@ts-ignore 
+    private scenario: Scenario;
 
-        const assetManager = AssetManager.getInstance();
-        const gamedata = assetManager.getGameData();
+    private assetManager = AssetManager.getInstance();
 
+
+    public setUp(): void{
+
+        const gamedata = this.assetManager.getGameData();
         // TODO ここで渡すシナリオオブジェクトの作成方法:引数を修正する。
         // 基本的にはセーブデータから、シナリオ番号を取得する
         // セーブデータがない場合は、シナリオ1から始める。
-        const scenario = ScenatioFactory.getScenario(gamedata.scenario.scene1.type);
-        scenario.init(gamedata.scenario.scene1);
-        scenario.executeScenario();
 
+        //　これはシングルトンでないとだめ。毎回newすると無理。
+        this.scenario = ScenatioFactory.getScenario(gamedata.scenario.scene1.type);
+        //初期化します。
+        this.scenario.init(gamedata.scenario.scene1);
+    }
+
+    /**
+     * シナリオを進めます。
+     * アセットデータのymlからシナリオを作成して、シナリオを実行します。
+     * jsのobjectって気持ち悪いなあと・・・
+     * 絶対にゲームデータモデル的なものにしたほうが安全
+     */
+    public runScenario(): void{
+        this.scenario.executeScenario();
     }
 
     /**
@@ -48,5 +65,11 @@ export default class ScenarioManager{
      * 
      * 
      */
+
+    // 例えばボタンを押したときに、シナリオに対して処理を発火させます。（ここはレシーバです）
+    public executeCommand(e : EventListener): void{
+        // TODO これださいので修正。メソッドに委譲する
+        // this.scenario.executeGenerator(e);
+    }
     
 }
