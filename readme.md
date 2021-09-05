@@ -277,7 +277,41 @@ example
         yield 0;
     }
 
+### async await
 
+メソッド名の前にasyncを付けてPromiseを返す関数を呼び出す際にawaitを付与します。
+するとthenを省略できます。
+以下の場合はgamedataにデータが入っています。
+
+    public async setup(): Promise<void>{
+
+        const gamedata = await AssetLoader.loadGameData("gamedata.yml");
+
+* 少し複雑な例
+
+    const result = await Promise.all(game.images.map( async (image: string)  => {
+        const loadResult = await AssetLoader.loadImage(image);
+        assetManager.setItem(image,loadResult);
+    }))
+
+この場合loadImageの全ての結果が完了するまで待ってくれます。
+
+
+
+### 引数に関数を取る方法
+
+引数を付ける場合は=>を付けます。
+
+    private createEvent(func:(prm:KeyboardEvent)=> void){
+        document.addEventListener("keydown", e => func(e));
+    }
+
+    jsと同じようにbindもできます
+
+    
+    const controller = Controller.getInstance(this.executeCommand.bind(this));
+
+    
 
 ### aaaaaa
 

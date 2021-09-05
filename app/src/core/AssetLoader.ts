@@ -1,5 +1,3 @@
-import AssetManager from "../manager/AssetManager";
-
 /**
  * アセットファイルをロードしてあっせとマネージャーに登録します。
  */
@@ -38,8 +36,5 @@ export default class AssetLoader{
         return fetch(`/${filename}`)
             .then( res => res.text());
     }
-
-
-
 
 }

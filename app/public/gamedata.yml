@@ -27,7 +27,7 @@ scenario:
         message:
           - かーのーんー！！！！！
   scene2:
-    type: CHOISE
+    type: MESSAGE
     back: image02.jpg
     render:
       - speaker: かのん

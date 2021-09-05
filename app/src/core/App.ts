@@ -1,9 +1,6 @@
  import Game from './Game';
- import Canvas from './Canvas';
  import AssetLoader from './AssetLoader';
  import AssetManager from '../manager/AssetManager';
-import { Z_UNKNOWN } from 'zlib';
-import { createImportSpecifier } from 'typescript';
 
 class App{
 
@@ -31,7 +28,7 @@ class App{
        this.update();
     }
     private update(): void {
-        this.game.update();
+        this.game.init();
     }
 }
 
