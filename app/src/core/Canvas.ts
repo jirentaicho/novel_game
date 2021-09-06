@@ -41,4 +41,8 @@ export default class Canvas{
         return this.height;
     }
 
+    public clearCanvas(): void{
+        this.ctx.clearRect(0,0,this.canvas.width,this.canvas.height);
+    }
+
 }module.exports = Canvas;

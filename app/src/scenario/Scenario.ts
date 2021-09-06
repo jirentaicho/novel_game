@@ -11,8 +11,23 @@ export default abstract class Scenario{
     protected actorLeft: string = "";
     protected actorRight: string = "";
 
+    /**
+     * シナリオの初期設定を行います。
+     * 基本の設定は基底クラスで行います。
+     * init→settingScenarioの順で呼ばれます。
+     * 
+     * @param object ゲームデータ
+     */
+
     abstract settingScenario(object: any): void;
+    /**
+     * ユーザーイベント発火時に呼ばれるもの
+     */
     abstract runLogic(): void;
+
+    /**
+     * アセットデータの描画を行います。
+     */
     abstract executeScenario(): void;
 
     /** 共通設定 */

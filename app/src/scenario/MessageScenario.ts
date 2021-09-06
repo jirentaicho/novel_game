@@ -1,6 +1,4 @@
-import Canvas from "../core/Canvas";
-import AssetManager from "../manager/AssetManager";
-import ImageRender from "../render/ImageRender";
+import BackImageRender from "../render/BackImageRender";
 import RectRender from "../render/RectRender";
 import SpeakerRender from "../render/SpeakerRender";
 import TextRender from "../render/TextRender";
@@ -10,6 +8,7 @@ import ScenarioManager from "./ScenarioManager";
 /**
  * シナリオはゲームに一つ存在（画面に）
  * 基本的には同一のインスタンスに対してセットアップを行う。
+ * クラス変数が多くなっているのが課題
  * 
  */
 export default class MessageScenario extends Scenario{
@@ -39,11 +38,7 @@ export default class MessageScenario extends Scenario{
 
         // そもそもレンダーが空になっていたら
         if(this.renderIndex >= this.render.length){
-            // 次の処理を実行する
-            // initScenatio(nextScenarioName);
-            console.log("DONE!!");
             const scenarioManager = ScenarioManager.getInstance();
-
             scenarioManager.setUp(this.nextScenarioName);
             return;
         }
@@ -56,14 +51,11 @@ export default class MessageScenario extends Scenario{
             this.runLogic();
             return;
         }
-
         // 全て描画します。
         this.executeScenario();
         // メッセージをインクリメントします。
         this.messageIndex++;
-
     }
-  
 
     /**
      * 
@@ -83,7 +75,7 @@ export default class MessageScenario extends Scenario{
     public executeScenario(): void {
     
         // 背景画像を描画します。
-        const imageRender = new ImageRender();
+        const imageRender = new BackImageRender();
         imageRender.rendering(this.backImage);
 
         const spakerRender = new SpeakerRender();

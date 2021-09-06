@@ -28,9 +28,18 @@ scenario:
           - かーのーんー！！！！！
   scene2:
     type: MESSAGE
+    next: scene3
     back: image02.jpg
     render:
       - speaker: かのん
         message:
           - どりゃあああああああ
           - ズリャアアアアアアアア
+  scene3:
+    type: CHOICE
+    next: scene1
+    back: image01.jpg
+    render:
+      - choice:
+        - スクールアイドルをやる
+        - スクールアイドルをやらない

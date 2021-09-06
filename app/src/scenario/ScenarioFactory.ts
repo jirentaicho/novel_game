@@ -14,7 +14,7 @@ export default class ScenatioFactory{
         if(type == SCENARIO_TYPE.MESSAGE){
             return MessageScenario.getInstance();
         }else{
-            return new ChoiceScenario();
+            return ChoiceScenario.getInstance();
         }
     }
 }

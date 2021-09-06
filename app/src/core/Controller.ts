@@ -16,13 +16,19 @@ import Canvas from "./Canvas";
  */
 export default class Controller{
 
-    private constructor(func:(prm:KeyboardEvent)=> void){
+    private constructor(func:(prm:MouseEvent | TouchEvent | KeyboardEvent)=> void){
+        // キーボード、マウスは選択できるようにしたい。
+        // interfaceが同じなら実現できる。
+        // 一旦はマウスのみで実装する（変更に強いコードで）
+        
         this.createEvent(func);
+        
+        
     }
 
     private static instance: Controller;
     
-    public static getInstance(func:(prm:KeyboardEvent)=> void): Controller{
+    public static getInstance(func:(prm:MouseEvent | TouchEvent | KeyboardEvent)=> void): Controller{
         if(!Controller.instance){
             Controller.instance = new Controller(func);
         }
@@ -33,19 +39,34 @@ export default class Controller{
      * 
      * 
      * 
-     * @param func 
+     * @param func 入力時のイベントハンドラ
      * 
      */
-    private createEvent(func:(prm:KeyboardEvent)=> void){
-
+    private createKeyEvent(func:(prm:KeyboardEvent)=> void){
         document.addEventListener("keydown", e => func(e));
 
+        /*
         const canvasClass = Canvas.getInstance();
         const canvas = canvasClass.getCanvas();
         canvas.addEventListener("mousedown", () => {
             //TODO 
         })
 
+        */
+
+    }
+
+    /**
+     * 
+     * PC時はMouseEvent　スマホではTouchEventをハンドリングします。
+     * 
+     * @param func クリック時のイベントハンドラ
+     */
+    private createEvent(func:(prm:MouseEvent | TouchEvent | KeyboardEvent) => void){
+        const canvas = Canvas.getInstance().getCanvas();
+        canvas.addEventListener("mousedown", e => func(e));
+        canvas.addEventListener("touchstart", e => func(e));
+        // document.addEventListener("keydown", e => func(e));
     }
 
 
