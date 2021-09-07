@@ -3,6 +3,9 @@ import RectRender from "../render/RectRender";
 import Scenario from "./Scenario";
 import TextRender from "../render/TextRender";
 import Canvas from "../core/Canvas";
+import ChoiceRender from "../render/ChoiceRender";
+import Point from "../collider/Point";
+import { ChoiceCollider } from "../collider/ChoiceCollider";
 export default class ChoiceScenario extends Scenario{
 
 
@@ -19,12 +22,24 @@ export default class ChoiceScenario extends Scenario{
         return ChoiceScenario.instance;
     }
 
-    private render: Array<any> = new Array();
+
+    private render: any;
 
     //@override
-    runLogic(): void {
-        console.log("thisi is choice scenario");
+    runLogic(point: Point): void {
+
         this.executeScenario();
+
+        console.log(`point is ${point.x}と${point.y} です。`)
+
+        //　当たり判定を行う
+        const col = new ChoiceCollider();
+        if(col.ishitTop(point)){
+            this.executeChoice(this.render.choice1);
+        }else if(col.ishitBottom(point)){
+            this.executeChoice(this.render.choice2);
+        }
+
         return;
     }
     //@override
@@ -34,7 +49,6 @@ export default class ChoiceScenario extends Scenario{
     //@override
     executeScenario(): void {
 
-        console.log(this.render);
         // TODO 処理の委譲
         const canvas = Canvas.getInstance().clearCanvas();
 
@@ -44,10 +58,31 @@ export default class ChoiceScenario extends Scenario{
 
         // ウインドウを描画する
         const rectRender = new RectRender();
-        rectRender.rendering("");
+        rectRender.renderChoiceRect();
+
+        const choiceRender = new ChoiceRender();
+        choiceRender.renderingChoice(this.render.choice1.text,this.render.choice2.text);
+
+    }
+
+
+    /**
+     * 
+     * 選択した内容に従って選択時のメソッドを全実行する。
+     * 
+     * @param choice 
+     * 
+     */
+    private executeChoice(choice: any): void{
         
-        const textRender = new TextRender();
-        textRender.rendering(this.render[0].choice[0]);
+        // ゲームマネージャーを取得します
+
+        // コマンドは複数ある可能性があります→配列へ
+
+        // コマンドの内容を全てゲームマネージャーに反映します。
+
+        // 次のシーンを読み込みます。
+
 
     }
     

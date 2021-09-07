@@ -311,7 +311,20 @@ example
     
     const controller = Controller.getInstance(this.executeCommand.bind(this));
 
-    
+### textの参考
+
+https://developer.mozilla.org/ja/docs/Web/API/CanvasRenderingContext2D/textBaseline
+
+ancorに対しての挙動は以下の指定をする
+
+    context.textBaseline = "top";
+
+テキストのalign設定には注意。
+
+    ctx.textAlign="center"; 
+
+これはancorに対してです。
+左端がancor担っている場合は文字列の半分が消えます。（はみ出ます）
 
 ### aaaaaa
 

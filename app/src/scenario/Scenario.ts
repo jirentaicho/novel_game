@@ -1,3 +1,5 @@
+import Point from "../collider/Point";
+
 /**
  * scenarioに関する抽象クラスです。
  * scenarioとしては、メッセージシナリオ、選択シナリオなど、種類があります。
@@ -23,7 +25,7 @@ export default abstract class Scenario{
     /**
      * ユーザーイベント発火時に呼ばれるもの
      */
-    abstract runLogic(): void;
+    abstract runLogic(point: Point): void;
 
     /**
      * アセットデータの描画を行います。

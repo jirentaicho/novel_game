@@ -1,7 +1,11 @@
 images:
-  - image01.jpg
-  - image02.jpg
-  - image03.jpg
+  - back.jpg
+  - keke.png
+  - ren.png
+  - kanon.png
+  - sumire.png
+  - tisato.png
+  - m_misaka.png
 valiable:
   - 好感度
   - やる気
@@ -11,7 +15,9 @@ scenario:
   scene1:
     type: MESSAGE
     next: scene2
-    back: image03.jpg
+    back: back.jpg
+    left: ren.png
+    right: kanon.png
     render:
       - speaker: 渋谷かのん
         message:
@@ -29,7 +35,9 @@ scenario:
   scene2:
     type: MESSAGE
     next: scene3
-    back: image02.jpg
+    back: back.jpg
+    left: tisato.png
+    right: keke.png
     render:
       - speaker: かのん
         message:
@@ -38,8 +46,19 @@ scenario:
   scene3:
     type: CHOICE
     next: scene1
-    back: image01.jpg
+    back: back.jpg
+    left: ren.png
+    right: keke.png
     render:
-      - choice:
-        - スクールアイドルをやる
-        - スクールアイドルをやらない
+      choice1:
+        text: スクールアイドルをやる
+        type: add
+        value: 10
+        target: renpoint
+        next: scene4
+      choice2:
+        text: スクールアイドルをやらない
+        type: min
+        value: 10
+        target: renpoint
+        next: scene5

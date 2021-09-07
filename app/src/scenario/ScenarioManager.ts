@@ -3,6 +3,7 @@ import AssetManager from '../manager/AssetManager';
 import MessageScenario from './MessageScenario';
 import ScenatioFactory from './ScenarioFactory';
 import { SCENARIO_TYPE } from './ScenatioType';
+import Point from '../collider/Point';
 
 /**
  * TODO クラス変数みたいなのは消したい。
@@ -36,8 +37,8 @@ export default class ScenarioManager{
     }
 
 
-    public runScenario(): void{
-        this.scenario.runLogic();
+    public runScenario(point : Point): void{
+        this.scenario.runLogic(point);
     }
 
 }

@@ -1,4 +1,6 @@
+import Point from "../collider/Point";
 import BackImageRender from "../render/BackImageRender";
+import CharacterRender from "../render/CharacterRender";
 import RectRender from "../render/RectRender";
 import SpeakerRender from "../render/SpeakerRender";
 import TextRender from "../render/TextRender";
@@ -34,7 +36,12 @@ export default class MessageScenario extends Scenario{
 
     private messageIndex: number = 0;
 
-    public runLogic(): void{
+    private leftImage: string = "";
+    private rightImage: string = "";
+
+
+    // TODO　しっくりくるメソッド名に修正する
+    public runLogic(point: Point): void{
 
         // そもそもレンダーが空になっていたら
         if(this.renderIndex >= this.render.length){
@@ -47,8 +54,9 @@ export default class MessageScenario extends Scenario{
             // 次のレンダーにして処理を戻す
             this.renderIndex++;
             this,this.messageIndex = 0;
-            //　再帰的に呼び出す
-            this.runLogic();
+            // 再帰的に呼び出す
+            // TODO 引数の見直し（インターフェースから）
+            this.runLogic(new Point(0,0));
             return;
         }
         // 全て描画します。
@@ -70,6 +78,9 @@ export default class MessageScenario extends Scenario{
         this.messageIndex = 0;
         this.render = object.render;
         this.nextScenarioName = object.next;
+
+        this.leftImage = object.left;
+        this.rightImage = object.right;
     }
 
     public executeScenario(): void {
@@ -81,6 +92,9 @@ export default class MessageScenario extends Scenario{
         const spakerRender = new SpeakerRender();
         spakerRender.rendering(this.render[this.renderIndex].speaker);
 
+        const caharaRender = new CharacterRender();
+        caharaRender.renderingCharacter(this.leftImage,this.rightImage);
+        
         // ウインドウを描画する
         const rectRender = new RectRender();
         rectRender.rendering("");
