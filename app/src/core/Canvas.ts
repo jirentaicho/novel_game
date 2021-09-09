@@ -1,7 +1,3 @@
-/**
- * 全体的にダサい
- * 
- */
 export default class Canvas{
 
     private static instance: Canvas;

@@ -4,12 +4,10 @@ import AssetManager from '../manager/AssetManager';
 export default class CharacterRender implements Render<string>{
 
     rendering(str: string){
-
     }
 
     renderingCharacter(leftImage: string, rightImage: string): void {
 
-        // 処理を分離したい
         const canva = Canvas.getInstance();
         const context = canva.getCtx();
         const assetManager = AssetManager.getInstance();

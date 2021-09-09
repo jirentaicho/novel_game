@@ -6,6 +6,9 @@ import Canvas from "../core/Canvas";
 import ChoiceRender from "../render/ChoiceRender";
 import Point from "../collider/Point";
 import { ChoiceCollider } from "../collider/ChoiceCollider";
+import CharacterRender from "../render/CharacterRender";
+import GameManager from "../manager/GameManager";
+import ScenarioManager from "./ScenarioManager";
 export default class ChoiceScenario extends Scenario{
 
 
@@ -25,13 +28,13 @@ export default class ChoiceScenario extends Scenario{
 
     private render: any;
 
+    // TODO dry
+    private leftImage: string = "";
+    private rightImage: string = "";
+
     //@override
     runLogic(point: Point): void {
-
         this.executeScenario();
-
-        console.log(`point is ${point.x}と${point.y} です。`)
-
         //　当たり判定を行う
         const col = new ChoiceCollider();
         if(col.ishitTop(point)){
@@ -45,6 +48,8 @@ export default class ChoiceScenario extends Scenario{
     //@override
     settingScenario(object: any): void {
         this.render = object.render;
+        this.leftImage = object.left;
+        this.rightImage = object.right;
     }
     //@override
     executeScenario(): void {
@@ -56,6 +61,9 @@ export default class ChoiceScenario extends Scenario{
         const imageRender = new BackImageRender();
         imageRender.rendering(this.backImage);
 
+        const caharaRender = new CharacterRender();
+        caharaRender.renderingCharacter(this.leftImage,this.rightImage);
+
         // ウインドウを描画する
         const rectRender = new RectRender();
         rectRender.renderChoiceRect();
@@ -63,8 +71,10 @@ export default class ChoiceScenario extends Scenario{
         const choiceRender = new ChoiceRender();
         choiceRender.renderingChoice(this.render.choice1.text,this.render.choice2.text);
 
-    }
+        // TODO dry
+        rectRender.renderSaveRect();
 
+    }
 
     /**
      * 
@@ -74,15 +84,16 @@ export default class ChoiceScenario extends Scenario{
      * 
      */
     private executeChoice(choice: any): void{
-        
+
         // ゲームマネージャーを取得します
-
-        // コマンドは複数ある可能性があります→配列へ
-
+        const gameManager = GameManager.getInstance();
+        
         // コマンドの内容を全てゲームマネージャーに反映します。
+        gameManager.executeLogic(choice.type, choice.value, choice.target);
 
         // 次のシーンを読み込みます。
-
+        const scenarioManager = ScenarioManager.getInstance();
+        scenarioManager.setUp(choice.next);
 
     }
     

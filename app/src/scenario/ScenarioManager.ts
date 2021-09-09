@@ -1,8 +1,6 @@
 import Scenario from './Scenario'
 import AssetManager from '../manager/AssetManager';
-import MessageScenario from './MessageScenario';
 import ScenatioFactory from './ScenarioFactory';
-import { SCENARIO_TYPE } from './ScenatioType';
 import Point from '../collider/Point';
 
 /**
@@ -27,13 +25,13 @@ export default class ScenarioManager{
     private assetManager = AssetManager.getInstance();
 
     //　ゲームデータからシナリオ作成します
-    public setUp(scenarioName: string): void{
-
-        console.log(scenarioName);
-        
+    public setUp(scenarioName: string): void{        
         const gamedata = this.assetManager.getGameData();
+        // console.log(scenarioName);
+
         this.scenario = ScenatioFactory.getScenario(gamedata.scenario[scenarioName].type);
         this.scenario.init(gamedata.scenario[scenarioName]);
+        this.runScenario(new Point(0,0));
     }
 
 

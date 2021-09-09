@@ -73,4 +73,13 @@ export default class AssetManager{
         return this.items;
     }
 
+    /**
+     * 
+     * 現在のゲームデータをyamlファイルにセーブします。
+     * 
+     */
+    public save(): void{
+
+    }
+
 }

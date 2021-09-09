@@ -1,4 +1,6 @@
 import Point from "../collider/Point";
+import Canvas from "../core/Canvas";
+import GameManager from "../manager/GameManager";
 import BackImageRender from "../render/BackImageRender";
 import CharacterRender from "../render/CharacterRender";
 import RectRender from "../render/RectRender";
@@ -46,6 +48,8 @@ export default class MessageScenario extends Scenario{
         // そもそもレンダーが空になっていたら
         if(this.renderIndex >= this.render.length){
             const scenarioManager = ScenarioManager.getInstance();
+            // ゲームマネージャにも次のシーン名を登録する。
+            GameManager.getInstance().setSceneName(this.nextScenarioName);
             scenarioManager.setUp(this.nextScenarioName);
             return;
         }
@@ -84,13 +88,13 @@ export default class MessageScenario extends Scenario{
     }
 
     public executeScenario(): void {
+
+        // TODO 処理の委譲
+        const canvas = Canvas.getInstance().clearCanvas();
     
         // 背景画像を描画します。
         const imageRender = new BackImageRender();
         imageRender.rendering(this.backImage);
-
-        const spakerRender = new SpeakerRender();
-        spakerRender.rendering(this.render[this.renderIndex].speaker);
 
         const caharaRender = new CharacterRender();
         caharaRender.renderingCharacter(this.leftImage,this.rightImage);
@@ -98,9 +102,15 @@ export default class MessageScenario extends Scenario{
         // ウインドウを描画する
         const rectRender = new RectRender();
         rectRender.rendering("");
+        rectRender.renderSpeakerRect();
+
+        const spakerRender = new SpeakerRender();
+        spakerRender.rendering(this.render[this.renderIndex].speaker);
 
         const textRender = new TextRender();
         textRender.rendering(this.render[this.renderIndex].message[this.messageIndex]);
+
+        rectRender.renderSaveRect();
     }
     
 }

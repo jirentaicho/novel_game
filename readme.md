@@ -120,23 +120,6 @@ ymlファイルをパースする
 > npm install -save js-yaml
 
 
-
-##　ここ修正して
-# ここいらないです
-    fsはブラウザでは使えません。
-
-    fsとかのモジュールはTypeScriptでの利用に以下をインストールする必要があります。?
-    真意不明
-
-    > npm install --save-dev @types/node
-
-    とりあえずpackage.jsonを修正
-
-    "browser": {
-        "fs": false,
-        "js-yaml": false
-    }
-
 ## 開発メモ
 
 ### yamlのパース
@@ -220,6 +203,16 @@ webpackを利用しているので、以下のコマンドでpublicフォルダ�
 値の追加はkeyを直接指定してOK
 
 `this.items[keyname] = value;`
+
+### ファイルの書き込み
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+
+fsが使えないので以下を使います
+
+> npm install file-saver --save
+
+> npm install @types/file-saver --save-dev
+
 
 
 ### ymlファイルの読み込み

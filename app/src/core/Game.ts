@@ -1,39 +1,20 @@
-import { KeyObject } from "crypto";
 import { ChoiceCollider } from "../collider/ChoiceCollider";
-import Point from "../collider/Point";
-import AssetManager from "../manager/AssetManager";
+import GameManager from "../manager/GameManager";
 import ScenarioManager from "../scenario/ScenarioManager";
-import Canvas from "./Canvas";
 import Controller from "./Controller";
 
 export default class Game{
 
-    private assetManager: AssetManager = AssetManager.getInstance();
+    private gameManager: GameManager = GameManager.getInstance();
 
     private scenarioManager: ScenarioManager = ScenarioManager.getInstance();
 
     public init(): void{
 
-        //　TODO なんかここださいので修正したい
-        this.scenarioManager.setUp("scene1");
+        const scene = this.gameManager.getSceneName();
+        this.scenarioManager.setUp(scene);
         
-        //これが初期化はやばい
-        this.scenarioManager.runScenario(new Point(0,0));
-
-        // コントローラーの作成
         const controller = Controller.getInstance(this.executeCommand.bind(this));
-        
-    }
-
-
-    /**
-     * 
-     * マウスやタッチイベントでの発火
-     * 
-     * @param e 
-     */
-    private executeClickCommand(e: MouseEvent | TouchEvent): void {
-       // this.scenarioManager.runScenario();
     }
 
     /**
@@ -42,12 +23,17 @@ export default class Game{
      * 
      * @param e キー入力情報 
      */
-    private executeCommand(e: MouseEvent | TouchEvent | KeyboardEvent): void {
-       
+    private executeCommand(e: MouseEvent | TouchEvent | KeyboardEvent): void {    
+        // TODO なんかおかしい
         const col = new ChoiceCollider();
         const point = col.getClickToPoint(e as MouseEvent | TouchEvent);
-        // 座標を気にするのは選択画面のみ。
-        // つまりメッセージ画面ではxyはどうでもよく発火さえできればいい。
+
+        // もしセーブをクリックしていたらセーブをする。
+        if(col.isHitSave(point)){
+            this.gameManager.saveGame();
+            return;
+        }
+
         this.scenarioManager.runScenario(point);
     }
 

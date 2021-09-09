@@ -2,6 +2,7 @@ import MessageScenario from "./MessageScenario";
 import ChoiceScenario from "./ChoiceScenario";
 import Scenario from "./Scenario";
 import { SCENARIO_TYPE } from "./ScenatioType";
+import BranchScenario from "./BranchScenario";
 
 /**
  * 
@@ -13,8 +14,10 @@ export default class ScenatioFactory{
     static getScenario(type: string): Scenario{
         if(type == SCENARIO_TYPE.MESSAGE){
             return MessageScenario.getInstance();
-        }else{
+        }else if(type == SCENARIO_TYPE.CHOICE){
             return ChoiceScenario.getInstance();
+        }else{
+            return BranchScenario.getInstance();
         }
     }
 }

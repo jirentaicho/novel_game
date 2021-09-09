@@ -63,8 +63,32 @@ export default abstract class Collider{
         }
 
         const _rect = Canvas.getInstance().getCanvas().getBoundingClientRect();
-        //return new Point(x,y);
         return new Point(x - _rect.left, y - _rect.top);
+    }
+
+    /**
+     * セーブをクリックしたときにTrueを返します。
+     * 
+     * @param point 
+     * @returns 
+     */
+    isHitSave(point: Point): boolean{
+        //　上範囲のレクト
+        const canvas = Canvas.getInstance();
+        const rect = new Rect(canvas.getWidth() - canvas.getWidth() / 5, 0, canvas.getWidth() / 5, canvas.getHeight() / 13.5);
+        return this.isPointInRect(point,rect);
+    }
+
+    isHitStart(point: Point): boolean{
+        const canvas = Canvas.getInstance();
+        const rect = new Rect(canvas.getWidth() / 2 - ((canvas.getWidth() / 5) / 2) , canvas.getHeight() / 3.5, canvas.getWidth() / 5, canvas.getHeight() / 8);
+        return this.isPointInRect(point,rect);
+    }
+
+    isHitLoad(point: Point): boolean{
+        const canvas = Canvas.getInstance();
+        const rect = new Rect(canvas.getWidth() / 2 - ((canvas.getWidth() / 5) / 2), canvas.getHeight() / 1.5, canvas.getWidth() / 5, canvas.getHeight() / 8);
+        return this.isPointInRect(point,rect);
     }
 
 

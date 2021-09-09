@@ -19,7 +19,6 @@ export class ChoiceCollider extends Collider{
         //　上範囲のレクト
         const canvas = Canvas.getInstance();
         const rect = new Rect(0, canvas.getHeight() / 4 , canvas.getWidth(), canvas.getHeight() / 4);
-        console.log(`${rect.x} ${rect.y} ${rect.width} ${rect.height}`)
         return this.isPointInRect(point,rect);
     }
 
@@ -27,7 +26,6 @@ export class ChoiceCollider extends Collider{
         // した範囲のレクト
         const canvas = Canvas.getInstance();
         const rect = new Rect(0, canvas.getHeight() / 1.5 , canvas.getWidth(), canvas.getHeight() / 4);
-        console.log(`${rect.x} ${rect.y} ${rect.width} ${rect.height}`)
         return this.isPointInRect(point,rect);
     }
 

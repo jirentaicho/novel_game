@@ -7,10 +7,11 @@ images:
   - tisato.png
   - m_misaka.png
 valiable:
-  - 好感度
-  - やる気
-  - 元気
-  - 久保田
+  scene: scene1
+  renpoint: 0
+  kanonpoint: 0
+  isDone: false
+  isGet: false  
 scenario:
   scene1:
     type: MESSAGE
@@ -45,7 +46,6 @@ scenario:
           - ズリャアアアアアアアア
   scene3:
     type: CHOICE
-    next: scene1
     back: back.jpg
     left: ren.png
     right: keke.png
@@ -58,7 +58,135 @@ scenario:
         next: scene4
       choice2:
         text: スクールアイドルをやらない
-        type: min
+        type: flag
+        value: true
+        target: isDone
+        next: scene5
+  scene4:
+    type: MESSAGE
+    next: scene6
+    back: back.jpg
+    left: ren.png
+    right: keke.png
+    render:
+      - speaker: かのん
+        message:
+          - 次は分岐のシーンです
+          - 犯罪上等！
+  scene5:
+    type: MESSAGE
+    next: scene6
+    back: back.jpg
+    left: kanon.png
+    right: keke.png
+    render:
+      - speaker: かのん
+        message:
+          - 次は分岐ノーシンじゃん、こっちはtrueルートじゃん
+          - ジャッジメントですの！
+  scene6:
+    type: BRANCH
+    back: back.jpg
+    target: isDone
+    command: eq
+    value: true
+    truescene: scene7 
+    falsescene: scene8
+  scene7:
+    type: MESSAGE
+    next: scene9
+    back: back.jpg
+    left: ren.png
+    right: kanon.png
+    render:
+      - speaker: 渋谷かのん
+        message:
+          - 自販機を蹴っ飛ばす
+      - speaker: 可可
+        message:
+          - 素晴らしい歌声の人・・・！！
+          - 呼ばせてやるよはんじょう殿！
+          - グソクムシがですか？
+      - speaker: すみれ
+        message:
+          - かーのーんー！！！！！
+  scene8:
+    type: MESSAGE
+    next: scene9
+    back: back.jpg
+    left: ren.png
+    right: kanon.png
+    render:
+      - speaker: 渋谷かのん
+        message:
+          - 犯罪上等！
+      - speaker: 可可
+        message:
+          - 素晴らしい歌声の人・・・！！
+          - 私はかのんさんとスクールアイドルがしたいです！
+          - グソクムシがですか？
+      - speaker: すみれ
+        message:
+          - かーのーんー！！！！！
+  scene9:
+    type: CHOICE
+    back: back.jpg
+    left: ren.png
+    right: keke.png
+    render:
+      choice1:
+        text: ゲーセンに行く
+        type: add
         value: 10
         target: renpoint
-        next: scene5
+        next: scene10
+      choice2:
+        text: カラオケに行く
+        type: min
+        value: 99
+        target: kanonpoint
+        next: scene10
+  scene10:
+    type: BRANCH
+    back: back.jpg
+    target: renpoint
+    command: more
+    value: 5
+    truescene: scene11
+    falsescene: scene12
+  scene11:
+    type: MESSAGE
+    next: scene9
+    back: back.jpg
+    left: ren.png
+    right: kanon.png
+    render:
+      - speaker: 渋谷かのん
+        message:
+          - れんちゃんのポイントが５ポイント以上だったよ！！！
+      - speaker: 可可
+        message:
+          - 素晴らしい歌声の人・・・！！
+          - 私はかのんさんとスクールアイドルがしたいです！
+          - グソクムシがですか？
+      - speaker: すみれ
+        message:
+          - かーのーんー！！！！！
+  scene12:
+    type: MESSAGE
+    next: scene9
+    back: back.jpg
+    left: ren.png
+    right: kanon.png
+    render:
+      - speaker: 渋谷かのん
+        message:
+          - れんちゃん脈梨わろた
+      - speaker: 可可
+        message:
+          - 素晴らしい歌声の人・・・！！
+          - 私はかのんさんとスクールアイドルがしたいです！
+          - グソクムシがですか？
+      - speaker: すみれ
+        message:
+          - かーのーんー！！！！！

@@ -1,6 +1,3 @@
-/**
- * アセットファイルをロードしてあっせとマネージャーに登録します。
- */
 export default class AssetLoader{
 
     private constructor(){
