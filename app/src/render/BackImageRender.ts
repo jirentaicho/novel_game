@@ -9,7 +9,9 @@ export default class BackImageRender implements Render<string>{
         const canva = Canvas.getInstance();
         const context = canva.getCtx();
         const assetManager = AssetManager.getInstance();
-        context.drawImage(assetManager.getItem(str), 0, 0);
+        if(str != ""){
+            context.drawImage(assetManager.getItem(str), 0, 0);
+        }
 
     }
     

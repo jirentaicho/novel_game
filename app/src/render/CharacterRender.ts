@@ -13,10 +13,10 @@ export default class CharacterRender implements Render<string>{
         const assetManager = AssetManager.getInstance();
         // TODO 空文字判定の修正
         if(leftImage != ""){
-            context.drawImage(assetManager.getItem(leftImage), 0,0);
+            context.drawImage(assetManager.getItem(leftImage), canva.getWidth() / 7, 0);
         }
         if(rightImage != ""){
-            context.drawImage(assetManager.getItem(rightImage), 500,0);
+            context.drawImage(assetManager.getItem(rightImage), canva.getWidth() / 2.3, 0);
         }
 
     }

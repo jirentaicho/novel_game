@@ -1,3 +1,6 @@
+import Point from "../collider/Point";
+import Rect from "../collider/Rect";
+
 /**
  * コンフィグ系の設定ファイルです。
  * 
@@ -33,6 +36,14 @@ export default class Config{
     static readonly XS_FONT: number = 18;
 
     /**
+     * 改行文字数
+     * 
+     */
+    static readonly XS_LINE: number = 15;
+    static readonly MD_LINE: number = 30;
+    static readonly XL_LINE: number = 40;
+
+    /**
      * 
      * 画面サイズに応じたフォントサイズを返却します。
      * 
@@ -55,5 +66,35 @@ export default class Config{
         }
 
     }
+
+    /**
+     * キャラクターの立ち位置
+     */
+
+    static getLeftPosition(): Point{
+        return new Point(0,0);
+    }
+
+    /**
+     * 
+     * 改行する前の文字数を取得します。
+     * 
+     * @returns 
+     */
+    static getTextLine(): number{
+        const windowsize = window.innerWidth;
+
+        if(windowsize > Config.PC){
+            return this.XL_LINE;
+
+        }else if(windowsize > Config.TB){
+            return this.MD_LINE;
+
+        } else{
+            return this.XS_LINE;
+
+        }
+    }
+    
 
 }
