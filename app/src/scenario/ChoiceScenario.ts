@@ -42,8 +42,8 @@ export default class ChoiceScenario extends Scenario{
         }else if(col.ishitBottom(point)){
             this.executeChoice(this.render.choice2);
         }
-
-        return;
+       
+       // return;
     }
     //@override
     settingScenario(object: any): void {
@@ -93,6 +93,7 @@ export default class ChoiceScenario extends Scenario{
 
         // 次のシーンを読み込みます。
         const scenarioManager = ScenarioManager.getInstance();
+        GameManager.getInstance().setSceneName(choice.next);
         scenarioManager.setUp(choice.next);
 
     }

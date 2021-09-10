@@ -11,7 +11,8 @@ valiable:
   renpoint: 0
   kanonpoint: 0
   isDone: false
-  isGet: false  
+  isGet: false
+titleImage: back.jpg  
 scenario:
   scene1:
     type: MESSAGE
@@ -22,6 +23,7 @@ scenario:
     render:
       - speaker: 渋谷かのん
         message:
+          - まずは簡単な挨拶
           - 私はアイドルって感じじゃないじゃん!!ずんずんちゃずんずんずんちゃへいよわたしまんまるすきすごくすき！うんこｍ、おすｋっしｈｆぢうｈげふいｆでいうｊｈふぇりうｆへづいおｆへういおｆふいｇｆほｒｙｈるいえｇｈふるいｂふｈふぃぶいお
           - 私には無理だよ
           - ごめんね

@@ -14,7 +14,7 @@ export default class Game{
         const scene = this.gameManager.getSceneName();
         this.scenarioManager.setUp(scene);
         
-        const controller = Controller.getInstance(this.executeCommand.bind(this));
+        Controller.getInstance(this.executeCommand.bind(this));
     }
 
     /**
@@ -27,6 +27,8 @@ export default class Game{
         // TODO なんかおかしい
         const col = new ChoiceCollider();
         const point = col.getClickToPoint(e as MouseEvent | TouchEvent);
+
+        e.stopPropagation();
 
         // もしセーブをクリックしていたらセーブをする。
         if(col.isHitSave(point)){

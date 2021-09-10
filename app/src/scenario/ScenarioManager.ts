@@ -27,8 +27,6 @@ export default class ScenarioManager{
     //　ゲームデータからシナリオ作成します
     public setUp(scenarioName: string): void{        
         const gamedata = this.assetManager.getGameData();
-        // console.log(scenarioName);
-
         this.scenario = ScenatioFactory.getScenario(gamedata.scenario[scenarioName].type);
         this.scenario.init(gamedata.scenario[scenarioName]);
         this.runScenario(new Point(0,0));

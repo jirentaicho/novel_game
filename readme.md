@@ -313,8 +313,19 @@ ancorに対しての挙動は以下の指定をする
 これはancorに対してです。
 左端がancor担っている場合は文字列の半分が消えます。（はみ出ます）
 
-### aaaaaa
+### クリックイベントの伝達
 
+タイトル画面でスタートボタンや、ロードボタンを押したときに、継続の処理に対してもクリックイベントが発火される（貫通で）
+そのため、スタート時に最初の会話が表示されない
+ロード時に選択イベントがロードできないなどが発生する
+そのため、基本的にはクリックしたときに、クリックポイントを作成したらクリックキャンセルを発火させる
 
+    private clickEvent = (e: MouseEvent | TouchEvent) => {
 
+    const canvas = Canvas.getInstance().getCanvas();
+    const col = new ChoiceCollider();
+    const point = col.getClickToPoint(e as MouseEvent | TouchEvent);
+    //　これ
+    e.stopPropagation();
 
+こうすることで、ポイントを渡す処理は完了するが、のちのち貫通してクリックイベントが発火させることはなくなる
