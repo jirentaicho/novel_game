@@ -1,5 +1,6 @@
 import Canvas from '../core/Canvas';
 import AssetManager from '../manager/AssetManager';
+import EmptyUtil from '../Utility/EmptyUtil';
 
 export default class BackImageRender implements Render<string>{
 
@@ -9,9 +10,10 @@ export default class BackImageRender implements Render<string>{
         const canva = Canvas.getInstance();
         const context = canva.getCtx();
         const assetManager = AssetManager.getInstance();
-        if(str != ""){
+        if(!EmptyUtil.isEmpty(str)){
             context.drawImage(assetManager.getItem(str), 0, 0);
         }
+        
 
     }
     

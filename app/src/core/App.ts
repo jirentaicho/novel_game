@@ -59,7 +59,6 @@ class App{
     }
 
     private startGame(isNew: boolean): void {
-        console.log("Unko");
         if(!isNew){
             const saveData = JSON.parse((localStorage.getItem("savedata") as any));
             const gameManager = GameManager.getInstance();

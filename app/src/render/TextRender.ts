@@ -1,9 +1,14 @@
 import Canvas from './../core/Canvas';
 import Config from '../core/Config';
+import EmptyUtil from '../Utility/EmptyUtil';
 
 export default class TextRender implements Render<string>{
     
     rendering(str: string): void {
+
+        if(EmptyUtil.isEmpty(str)){
+            return;
+        }
 
 
         const texts = new Array();

@@ -1,8 +1,10 @@
 import Config from '../core/Config';
+import EmptyUtil from '../Utility/EmptyUtil';
 import Canvas from './../core/Canvas';
 
 export default class ChoiceRender implements Render<string>{
 
+    
     rendering(str: string): void {
 
         // TODO 色々な責務を分離する（文字サイズの指定とかはここじゃないよね）
@@ -10,7 +12,10 @@ export default class ChoiceRender implements Render<string>{
         const context = canva.getCtx();
         context.font = "48px serif";
         context.fillStyle = "#fff";
-        context.fillText(str, 10, canva.getHeight() - canva.getHeight() / 3.5);
+        // そもそも書く処理にバリデーション持たせたい
+        if(!EmptyUtil.isEmpty(str)){
+            context.fillText(str, 10, canva.getHeight() - canva.getHeight() / 3.5);
+        }
 
     }
 
