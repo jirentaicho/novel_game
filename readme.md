@@ -121,9 +121,16 @@ yamlファイルに以下のような記載をしてゲームを作成します�
 それぞれの詳細です。
 シーン名をkeyにして以下をvalueとして記載していきます。
 
+#### MESSAGE
+
+
+メッセージシーンはただ、話し手とメッセージ内容をそれぞれ表示表示します。
+長文は自動で改行されます。
+
+
 | key名 | 値           | 形式         | 
 | ----- | ------------ | ------------ | 
-| type  | MESAGE       | オブジェクト | 
+| type  | MESSAGE       | オブジェクト | 
 | next  | 次のシーン名 | オブジェクト | 
 | back  | 背景画像 | オブジェクト | 
 | left  | 左側のアクター画像 | オブジェクト | 
@@ -160,7 +167,86 @@ renderの内容
                 - あっちで一緒に遊ぼうよ！
                 - 行こうよ！
 
+#### CHOICE
 
+選択シーンは選択肢によって変数の値を変更したり、選択肢によって遷移先のシーンを変更できます。
+
+
+| key名 | 値           | 形式         | 
+| ----- | ------------ | ------------ | 
+| type  | CHOICE       | オブジェクト | 
+| back  | 背景画像 | オブジェクト | 
+| left  | 左側のアクター画像 | オブジェクト | 
+| right  | 右側のアクター画像 | オブジェクト | 
+| render  | choice1とchoice2 | オブジェクト | 
+
+renderのchoice1とchoice2の内容
+
+| key名 | 値           | 形式         | 
+| ----- | ------------ | ------------ | 
+| text | 選択肢の内容 | オブジェクト | 
+| type  | 選択時の実行コマンド | オブジェクト | 
+| value  | 実行コマンドの引数 | オブジェクト | 
+| target  | コマンドの対象変数 | オブジェクト | 
+| next | 選択時の遷移先シーン名 | オブジェクト |
+
+
+typeの種類
+
+* add / targetの変数にvalueの値を加算します
+* min / targetの変数にvalueの値を減算します
+* flag / targetの変数のフラグをvalueの値に変更します(true/false)
+
+例
+    scene3:
+        type: CHOICE
+        back: back.jpg
+        left: ren.png
+        right: keke.png
+        render:
+        choice1:
+            text: スクールアイドルをやる
+            type: add
+            value: 10
+            target: renpoint
+            next: scene4
+        choice2:
+            text: スクールアイドルをやらない
+            type: flag
+            value: true
+            target: isDone
+            next: scene5
+
+
+#### BRANCH
+
+ブランチシーンは変数の値に応じて遷移先のシーンを決定します。
+
+| key名 | 値           | 形式         | 
+| ----- | ------------ | ------------ | 
+| type  | BRANCH       | オブジェクト | 
+| target  | 変数名 | オブジェクト | 
+| command  | 値比較を行うコマンド | オブジェクト | 
+| value  | 値比較を行う値 | オブジェクト | 
+| truescene  | 比較結果がtrueの場合の遷移先シーン名 | オブジェクト | 
+| falsescene  | 比較結果がfalseの場合の遷移先シーン名 | オブジェクト |
+
+
+commandの種類
+
+* more / targetの変数がvalueの値より大きい場合tureそれ以外の場合false
+* less / targetの変数がvalueの値より小さい場合tureそれ以外の場合false
+* eq / targetの変数がvalueの値と等しい場合trueそれ以外の場合false(true/false)
+
+
+例
+    scene6:
+        type: BRANCH
+        target: isDone
+        command: eq
+        value: true
+        truescene: scene7 
+        falsescene: scene8
 
 
 ## 開発メモ

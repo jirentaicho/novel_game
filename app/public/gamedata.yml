@@ -85,7 +85,6 @@ scenario:
           - ジャッジメントですの！
   scene6:
     type: BRANCH
-    back: back.jpg
     target: isDone
     command: eq
     value: true
@@ -147,7 +146,6 @@ scenario:
         next: scene10
   scene10:
     type: BRANCH
-    back: back.jpg
     target: renpoint
     command: more
     value: 5
