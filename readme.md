@@ -198,6 +198,7 @@ typeの種類
 * flag / targetの変数のフラグをvalueの値に変更します(true/false)
 
 例
+
     scene3:
         type: CHOICE
         back: back.jpg
@@ -240,6 +241,7 @@ commandの種類
 
 
 例
+
     scene6:
         type: BRANCH
         target: isDone
