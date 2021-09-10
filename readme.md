@@ -140,25 +140,25 @@ renderの内容
 
 例
 
-scenario:
-  scene1:
-    type: MESSAGE
-    next: scene2
-    back: back.jpg
-    left: ren.png
-    right: kanon.png
-    render:
-      - speaker: 澁谷かのん
-        message:
-          - 大丈夫
-          - 私がちぃちゃんを守るから！
-      - speaker: 嵐千砂都
-        message:
-          - うん・・・
-      - speaker: 澁谷かのん
-        message:
-          - あっちで一緒に遊ぼうよ！
-          - 行こうよ！
+    scenario:
+        scene1:
+            type: MESSAGE
+            next: scene2
+            back: back.jpg
+            left: ren.png
+            right: kanon.png
+            render:
+            - speaker: 澁谷かのん
+                message:
+                - 大丈夫
+                - 私がちぃちゃんを守るから！
+            - speaker: 嵐千砂都
+                message:
+                - うん・・・
+            - speaker: 澁谷かのん
+                message:
+                - あっちで一緒に遊ぼうよ！
+                - 行こうよ！
 
 
 
