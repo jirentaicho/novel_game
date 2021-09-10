@@ -1,7 +1,45 @@
-# 一応ゲームできます
+# ブラウザで遊べるノベルゲームを作成できます
+
+## 概要
+
+yamlファイルを修正するだけノベルゲーム（ギャルゲー）を作成できます。
+以下の機能があります
+
+* タイトル画面
+* メッセージシーン
+* 選択シーン
+* 条件シーン（条件によって遷移先のシーンを変更する
+* 変数の使用（変数に値を変化させてシナリオ内容を分岐させます）
+* セーブ・ロード（1つのデータのみブラウザのローカルストレージに保存します）
 
 
-環境について
+## 環境について
+
+WEBサーバーが必要です。（簡単に作れます）
+
+WEBサーバーの構築は以下の方法があります（案）
+
+* 付属のDocker-compose.ymlでコンテナを立ち上げる
+* 付属のpythonファイルでWEBサーバーを立ち上げる(簡単)→pythonのv3をインストールしてください。
+
+## 以下を実行
+
+コマンドプロンプトやターミナルから、ダウンロードしたファイルの/app/publicに移動します
+例：
+> cd C:\Users\misaka\Documents\dockers\nginxnode\app\public
+
+以下のコマンドを実行します
+
+> python3 -m http.server 8080
+
+以下のURLにアクセスします。
+
+> http://localhost:8080/
+
+
+※画像など追加しても反映されない場合はキャッシュ削除とか、プライベートモードでのアクセスを試みてください。
+
+## Dockerコンテナについて
 
 ・nginx → 実行用
 ・node → 開発用
@@ -9,7 +47,8 @@
 public → ビルド済（公開ファイル)
 src → tsファイル（開発）
 
-## 初期設定
+
+## DockerでWEBサーバーを立ち上げる場合
 
 git cloneなりしてプロジェクトのルートで以下コマンド
 
@@ -35,15 +74,98 @@ git cloneなりしてプロジェクトのルートで以下コマンド
         "start": "webpack-cli serve --mode development"
     },
 
+## yamlファイルの記載内容について
 
-## 付属のpythonで実行する
+yamlファイルに以下のような記載をしてゲームを作成します。
 
-dockerもnodeもわからん場合は、pythonで実行できます。
+### images
+
+利用する全ての画像を配列で指定します
+
+    images:
+        - back.jpg
+        - keke.png
+        - ren.png
+        - kanon.png
+        - sumire.png
+        - tisato.png
+        - m_misaka.png
+
+### valiable
+
+利用する全ての変数をオブジェクトで指定します
+※必ず最初のシーン名を登録してください。
+
+    valiable:
+        scene: scene1 
+        renpoint: 0
+        kanonpoint: 0
+        isDone: false
+        isGet: false
+
+### titleImage
+
+タイトル画面で表示するタイトル画像を指定してください。
+
+    titleImage: back.jpg  
+
+### scenario
+
+シナリオを記載します。
+表現できるシナリオは３種類あります。
+
+* MESSAGE
+* CHOICE
+* BRANCH
+
+それぞれの詳細です。
+シーン名をkeyにして以下をvalueとして記載していきます。
+
+| key名 | 値           | 形式         | 
+| ----- | ------------ | ------------ | 
+| type  | MESAGE       | オブジェクト | 
+| next  | 次のシーン名 | オブジェクト | 
+| back  | 背景画像 | オブジェクト | 
+| left  | 左側のアクター画像 | オブジェクト | 
+| right  | 右側のアクター画像 | オブジェクト | 
+| render  | speakerとmessage | 配列 | 
+
+renderの内容
+
+| key名 | 値           | 形式         | 
+| ----- | ------------ | ------------ | 
+| speaker | 話す人 | オブジェクト | 
+| message  | メッセージ内容| 配列 | 
+
+
+例
+
+scenario:
+  scene1:
+    type: MESSAGE
+    next: scene2
+    back: back.jpg
+    left: ren.png
+    right: kanon.png
+    render:
+      - speaker: 澁谷かのん
+        message:
+          - 大丈夫
+          - 私がちぃちゃんを守るから！
+      - speaker: 嵐千砂都
+        message:
+          - うん・・・
+      - speaker: 澁谷かのん
+        message:
+          - あっちで一緒に遊ぼうよ！
+          - 行こうよ！
 
 
 
 
-##　1から開発する場合（dockerを使う場合は不要です）
+## 開発メモ
+
+### 環境構築
 
 まずは以下コマンドで開発環境を構築します
 
@@ -124,8 +246,6 @@ ymlファイルをパースする
 
 > npm install -save js-yaml
 
-
-## 開発メモ
 
 ### yamlのパース
 
