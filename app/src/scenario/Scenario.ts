@@ -1,4 +1,5 @@
 import Point from "../collider/Point";
+import AudioManager from "../manager/AudioManager";
 
 /**
  * scenarioに関する抽象クラスです。
@@ -38,6 +39,10 @@ export default abstract class Scenario{
         this.backImage = object.back;
         this.actorLeft = object.actorleft;
         this.actorRight = object.actorright;
+
+        // bmgがあれば再生する
+        const audio = AudioManager.getInstance();
+        audio.playMusic(object.bgm); 
 
         //ここからsettingを呼び出せば、呼出し側はobjectを渡すだけの認識で済みます。
         this.settingScenario(object);

@@ -135,7 +135,14 @@ yamlファイルに以下のような記載をしてゲームを作成します�
 | back  | 背景画像 | オブジェクト | 
 | left  | 左側のアクター画像 | オブジェクト | 
 | right  | 右側のアクター画像 | オブジェクト | 
+| bgm | 音楽ファイル名 | オブジェクト |
 | render  | speakerとmessage | 配列 | 
+
+
+* bgm
+* * 省略可能です。
+* * もし再生を止めたい場合はstopを指定してください
+
 
 renderの内容
 
@@ -152,20 +159,22 @@ renderの内容
             type: MESSAGE
             next: scene2
             back: back.jpg
-            left: ren.png
-            right: kanon.png
+            left: keke.png
+            right: ren.png
+            bgm: k1.mp3
             render:
-            - speaker: 澁谷かのん
+                - speaker: 葉月恋
                 message:
-                - 大丈夫
-                - 私がちぃちゃんを守るから！
-            - speaker: 嵐千砂都
+                    - このチラシを配っているのはあなたですね
+                    - 勝手にこんな勧誘を
+                    - 理事長の許可は取ったのですか？
+                - speaker: 可可
                 message:
-                - うん・・・
-            - speaker: 澁谷かのん
+                    - すみません
+                    - 可可はただ、スクールアイドルを始めたいと思いまして・・・
+                - speaker: 葉月恋
                 message:
-                - あっちで一緒に遊ぼうよ！
-                - 行こうよ！
+                    - 勝手なことはやらないでほしいのです。
 
 #### CHOICE
 
@@ -178,6 +187,7 @@ renderの内容
 | back  | 背景画像 | オブジェクト | 
 | left  | 左側のアクター画像 | オブジェクト | 
 | right  | 右側のアクター画像 | オブジェクト | 
+| bgm | 音楽ファイル名 | オブジェクト |
 | render  | choice1とchoice2 | オブジェクト | 
 
 renderのchoice1とchoice2の内容
@@ -204,6 +214,7 @@ typeの種類
         back: back.jpg
         left: ren.png
         right: keke.png
+        bgm: stop
         render:
         choice1:
             text: スクールアイドルをやる

@@ -6,12 +6,15 @@ import RectRender from '../render/RectRender';
 import { ChoiceCollider } from '../collider/ChoiceCollider';
 import Canvas from './Canvas';
 import BackImageRender from '../render/BackImageRender';
+import AudioManager from '../manager/AudioManager';
 
 class App{
 
     private game : Game;
 
     private titleImage: string = "";
+
+    private bgm: string = "";
 
     constructor(game: Game){
         this.game = game;
@@ -20,7 +23,7 @@ class App{
      * 全てのアセットの読み込みが完了したらゲームを開始する
      */
     public async setup(): Promise<void>{
-  
+
         //　全てのアセットデータをロードする
         await this.loadAllAsset();
 
@@ -34,9 +37,18 @@ class App{
 
         canvas.addEventListener('mousedown', this.clickEvent, true);
         canvas.addEventListener('touchstart', this.clickEvent, true);
+
+        // ここでならせない
+        // クリック時はOK
+        const audio = AudioManager.getInstance();
+        audio.playMusic(this.bgm);  
+
+
     }
     
     private clickEvent = (e: MouseEvent | TouchEvent) => {
+
+ 
 
         const canvas = Canvas.getInstance().getCanvas();
         const col = new ChoiceCollider();
@@ -80,6 +92,7 @@ class App{
         assetManager.setGameData(game);
 
         this.titleImage = game.titleImage;
+        this.bgm = game.titleMusic;
 
         const gameManager = GameManager.getInstance();
         gameManager.setGameValue(game.valiable);

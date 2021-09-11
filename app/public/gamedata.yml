@@ -14,6 +14,7 @@ valiable:
   isDone: false
   isGet: false
 titleImage: back.jpg  
+titleMusic: k1.mp3
 scenario:
   scene1:
     type: MESSAGE
@@ -21,6 +22,7 @@ scenario:
     back: back.jpg
     left: keke.png
     right: ren.png
+    bgm: k1.mp3
     render:
       - speaker: 葉月恋
         message:
@@ -36,6 +38,7 @@ scenario:
           - 勝手なことはやらないでほしいのです。
   scene2:
     type: MESSAGE
+    bgm: stop
     next: scene3
     back: back.jpg
     left: kanon.png
@@ -54,6 +57,7 @@ scenario:
     back: back.jpg
     left: kanon.png
     right: ren.png
+    bgm: k1.mp3
     render:
       choice1:
         text: 関係なくはないというか・・・
