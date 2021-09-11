@@ -15,10 +15,10 @@ export default class CharacterRender implements Render<string>{
         // TODO 空文字判定の修正
         
         if(!EmptyUtil.isEmpty(leftImage)){
-            context.drawImage(assetManager.getItem(leftImage), canva.getWidth() / 7, 0);
+            context.drawImage(assetManager.getItem(leftImage), canva.getWidth() / 6.8, canva.getHeight() - canva.getHeight() / 1.2 ,canva.getWidth() / 3 ,canva.getHeight() / 1.2);
         }
         if(!EmptyUtil.isEmpty(rightImage)){
-            context.drawImage(assetManager.getItem(rightImage), canva.getWidth() / 2.3, 0);
+            context.drawImage(assetManager.getItem(rightImage), canva.getWidth() / 1.8, canva.getHeight() - canva.getHeight() / 1.2 ,canva.getWidth() / 3 ,canva.getHeight() / 1.2);
         }
 
     }

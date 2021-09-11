@@ -11,7 +11,7 @@ export default class BackImageRender implements Render<string>{
         const context = canva.getCtx();
         const assetManager = AssetManager.getInstance();
         if(!EmptyUtil.isEmpty(str)){
-            context.drawImage(assetManager.getItem(str), 0, 0);
+            context.drawImage(assetManager.getItem(str), 0, 0,canva.getWidth(),canva.getHeight());
         }
         
 
