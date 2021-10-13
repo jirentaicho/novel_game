@@ -1,0 +1,127 @@
+﻿images:
+- back.jpg
+- kanon.png
+valiable:
+  koushaku: batol
+  agomange: 0
+titleimage: back.jpg
+titlemusic: ''
+firstscene: first
+scenario:
+  first:
+    type: MESSAGE
+    next: agomange
+    back: back.jpg
+    right: kanon.png
+    left: kanon.png
+    bgm: ''
+    target: 
+    command: 
+    value: 
+    truescene: 
+    falsescene: 
+    render:
+    - speaker: kato
+      message:
+      - takadkaenshisine
+      - oechan
+    - speaker: akumanoko
+      message:
+      - unkochann
+      - bi-konn
+    - speaker: agomange-w
+      message:
+      - unko
+      - unko
+    choice: 
+  agomange:
+    type: CHOICE
+    next: 
+    back: back.jpg
+    right: kanon.png
+    left: kanon.png
+    bgm: 
+    target: 
+    command: 
+    value: 
+    truescene: 
+    falsescene: 
+    render: 
+    choice:
+      choice1:
+        text: agomange
+        type: add
+        value: 9
+        target: agomange
+        next: branche
+      choice2:
+        text: ungow
+        type: min
+        value: 9
+        target: agomange
+        next: branche
+  branche:
+    type: BRANCH
+    next: 
+    back: 
+    right: 
+    left: 
+    bgm: 
+    target: agomange
+    command: more
+    value: 5
+    truescene: truescene
+    falsescene: falsescene
+    render: 
+    choice: 
+  truescene:
+    type: MESSAGE
+    next: first
+    back: back.jpg
+    right: kanon.png
+    left: kanon.png
+    bgm: ''
+    target: 
+    command: 
+    value: 
+    truescene: 
+    falsescene: 
+    render:
+    - speaker: かのん
+      message:
+      - trueだよ
+    choice: 
+  falsescene:
+    type: MESSAGE
+    next: first
+    back: back.jpg
+    right: kanon.png
+    left: kanon.png
+    bgm: ''
+    target: 
+    command: 
+    value: 
+    truescene: 
+    falsescene: 
+    render:
+    - speaker: ちいちゃん
+      message:
+      - まるなんだYO
+    choice: 
+  message:
+    type: MESSAGE
+    next: first
+    back: back.jpg
+    right: kanon.png
+    left: kanon.png
+    bgm: ''
+    target: 
+    command: 
+    value: 
+    truescene: 
+    falsescene: 
+    render:
+    - speaker: unko
+      message:
+      - chinko
+    choice: 

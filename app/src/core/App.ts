@@ -84,18 +84,23 @@ class App{
      * 全てのアセットをロードします。
      */
     private async loadAllAsset(): Promise<void>{
-        const gamedata = await AssetLoader.loadGameData("gamedata.yml");
+        // ファイル名をyamlに修正
+        const gamedata = await AssetLoader.loadGameData("gamedata.yaml");
         const yaml = require("js-yaml");
         const game = yaml.load(gamedata);
        
         const assetManager = AssetManager.getInstance();
         assetManager.setGameData(game);
 
-        this.titleImage = game.titleImage;
-        this.bgm = game.titleMusic;
+        // dotnetyamlの問題で小文字に統一
+        this.titleImage = game.titleimage;
+        this.bgm = game.titlemusic;
 
         const gameManager = GameManager.getInstance();
         gameManager.setGameValue(game.valiable);
+        // ここで初期のシーン名を設定する必要がある。
+        gameManager.setSceneName(game.firstscene);
+
 
         const result = await Promise.all(game.images.map( async (image: string)  => {
             const loadResult = await AssetLoader.loadImage(image);
