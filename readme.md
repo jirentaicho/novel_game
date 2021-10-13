@@ -1,5 +1,12 @@
 # ブラウザで遊べるノベルゲームを作成できます
 
+最新バージョン v2
+
+
+# 変更履歴
+- 2021/10/13 v2 Windows版シナリオ作成アプリに対応しました。
+- 2021/xx/xx v1 リリースしました。
+
 ## 概要
 
 yamlファイルを修正するだけノベルゲーム（ギャルゲー）を作成できます。
@@ -104,20 +111,33 @@ yamlファイルに以下のような記載をしてゲームを作成します�
 ### valiable
 
 利用する全ての変数をオブジェクトで指定します
-※必ず最初のシーン名を登録してください。
+v2から最初の起動シーンは変数化を取りやめました。
 
     valiable:
-        scene: scene1 
         renpoint: 0
         kanonpoint: 0
         isDone: false
         isGet: false
 
-### titleImage
+### titleimage
 
 タイトル画面で表示するタイトル画像を指定してください。
 
-    titleImage: back.jpg  
+    titleimage: back.jpg  
+
+### firstscene
+
+v2から追加
+最初に起動するシーン名を指定ください。
+
+    firstscene: first
+
+### titlemusic
+
+タイトル画面で流すBGMを指定してください
+
+    titlemusic: sample.mp3
+
 
 ### scenario
 
@@ -225,7 +245,7 @@ typeの種類
         left: ren.png
         right: keke.png
         bgm: stop
-        render:
+        choice:
         choice1:
             text: スクールアイドルをやる
             type: add
@@ -239,6 +259,8 @@ typeの種類
             target: isDone
             next: scene5
 
+
+v2からchoiceに関してはrenderをchoiceに修正しています。
 
 #### BRANCH
 
@@ -558,3 +580,7 @@ ancorに対しての挙動は以下の指定をする
     e.stopPropagation();
 
 こうすることで、ポイントを渡す処理は完了するが、のちのち貫通してクリックイベントが発火させることはなくなる
+
+## 開発言語
+
+TypeScript

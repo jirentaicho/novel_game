@@ -47,7 +47,8 @@ export default class ChoiceScenario extends Scenario{
     }
     //@override
     settingScenario(object: any): void {
-        this.render = object.render;
+        // dotnetyamlによってrenderはchoiceに変更
+        this.render = object.choice;
         this.leftImage = object.left;
         this.rightImage = object.right;
     }
