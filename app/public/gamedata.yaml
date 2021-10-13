@@ -5,7 +5,7 @@ valiable:
   koushaku: batol
   agomange: 0
 titleimage: back.jpg
-titlemusic: ''
+titlemusic: bgm1.mp3
 firstscene: first
 scenario:
   first:
@@ -14,7 +14,7 @@ scenario:
     back: back.jpg
     right: kanon.png
     left: kanon.png
-    bgm: ''
+    bgm: bgm1.mp3
     target: 
     command: 
     value: 
